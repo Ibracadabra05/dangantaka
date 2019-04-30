@@ -3,6 +3,7 @@ package io.ibrah.com;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.ibrah.com.resources.UserResource;
 
 public class dangantakaApplication extends Application<dangantakaConfiguration> {
 
@@ -23,7 +24,7 @@ public class dangantakaApplication extends Application<dangantakaConfiguration> 
     @Override
     public void run(final dangantakaConfiguration configuration,
                     final Environment environment) {
-        // TODO: implement application
+        environment.jersey().register(new UserResource());
     }
 
 }

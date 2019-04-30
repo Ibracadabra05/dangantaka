@@ -6,5 +6,5 @@ import org.hibernate.validator.constraints.*;
 import javax.validation.constraints.*;
 
 public class dangantakaConfiguration extends Configuration {
-    // TODO: implement service configuration
+    // TODO: implement service config
 }
