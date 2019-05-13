@@ -9,18 +9,22 @@ import javax.ws.rs.core.MediaType;
 
 public class User {
 
-    public User() {
+    private int id;
+    private String name;
 
+    public User(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     @JsonProperty
     public int getId(){
-        return 1;
+        return this.id;
     }
 
     @JsonProperty
     public String getName(){
-        return "Ibrah";
+        return this.name;
     }
 
 }

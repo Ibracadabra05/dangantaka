@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.*;
 
 
 /**
@@ -28,36 +29,57 @@ public class UserResource {
 
     @GET
     @Path("{id}")
-    public User getUser(final @PathParam("id") Long userId) {
-        return new User();
+    public User getUser(final @PathParam("id") int userId) {
+
+        User user = null;
+
+        try {
+            Statement stmt = this.userConnection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM users WHERE id=" + Integer.toString(userId));
+
+            if (rs.next()){
+                user = new User(rs.getInt(1), rs.getString(2));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        // TODO: Throw 404 when no user with matching id is found.
+        return user;
     }
 
     @GET
     @Path("{id}/followers/")
-    public User[] getFollowers(final @PathParam("id") Long userId) {
+    public User[] getFollowers(final @PathParam("id") int userId) {
         return  new User[5];
     }
 
     @GET
     @Path("{id}/follows/")
-    public User[] getFollows(final @PathParam("id") Long userId) {
+    public User[] getFollows(final @PathParam("id") int userId) {
         return new User[3];
     }
 
     @GET
-    public User[] getAllUsers(){
+    public List<User> getAllUsers(){
+        List<User> users = new ArrayList<User>();
+
         try {
+
             Statement stmt = this.userConnection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM users");
 
             while (rs.next()) {
-                System.out.println(rs.getInt(1) + " : " + rs.getString(2));
+                User currUser = new User(rs.getInt(1), rs.getString(2));
+                users.add(currUser);
             }
-            this.userConnection.close();
+//            this.userConnection.close();
 
         } catch (SQLException e) {
             System.out.println(e.getStackTrace().toString());
         }
-        return new User[10];
+        return users;
     }
 }

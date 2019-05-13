@@ -9,10 +9,10 @@ import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class dangantakaApplication extends Application<dangantakaConfiguration> {
+public class DangantakaApplication extends Application<DangantakaConfiguration> {
 
     public static void main(final String[] args) throws Exception {
-        new dangantakaApplication().run(args);
+        new DangantakaApplication().run(args);
     }
 
     @Override
@@ -21,12 +21,12 @@ public class dangantakaApplication extends Application<dangantakaConfiguration> 
     }
 
     @Override
-    public void initialize(final Bootstrap<dangantakaConfiguration> bootstrap) {
+    public void initialize(final Bootstrap<DangantakaConfiguration> bootstrap) {
         // TODO: application initialization
     }
 
     @Override
-    public void run(final dangantakaConfiguration configuration,
+    public void run(final DangantakaConfiguration configuration,
                     final Environment environment) {
 
         try {
